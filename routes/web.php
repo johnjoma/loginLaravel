@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin', function(){
-    return 'You are admin';
+    return 'You are an Admin or an Author!';
 })->middleware(['auth','auth.admin']);
 
 

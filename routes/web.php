@@ -23,4 +23,6 @@ Route::get('/admin', function(){
     return 'You are an Admin or an Author!';
 })->middleware(['auth','auth.admin']);
 
+Route::resource('/admin/users','Admin\UserController',['except'=>['show','create','store']]);
+
 

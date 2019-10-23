@@ -9,7 +9,7 @@
 
                 <div class="card-body">
 
-                <form action="{{route('admin.users.update',['user'=>$user->$id])}}" method="POST">
+                <form action="{{route('admin.users.update',['user'=>$user->id])}}" method="POST">
                      @csrf
                      {{method_field('PUT')}}
 
@@ -20,9 +20,8 @@
                           {{$user->hasAnyRole($role->name)?'checked':''}}>
                           <label> {{$role->name}}</label>
                           </div>
-
-
                      @endforeach
+                     <button type="submit" class="btn btn-primary"> update</button>
                 
                 </form>
                     

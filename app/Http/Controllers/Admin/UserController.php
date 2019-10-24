@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('users',User::all());
+        return view('admin.users.index')->with('users',User::paginate(5));
     }
 
     /**
@@ -61,6 +61,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->id ==$id){
+            return redirect()->route('admin.users.index')->with('warning','Sorry, you are not allowed to delete yourself!');
+        }
+       
+        $user=User::find($id);
+        if($user){
+            $user->roles()->detach();
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success','User has been deleted'); 
+
+        }
+       return redirect()->route('admin.users.index')->with('warning','User is not found or cannot be deleted!'); 
     }
 }
